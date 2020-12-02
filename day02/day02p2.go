@@ -20,23 +20,23 @@ func readLines(file string) []string {
 func isPasswordValid(line string) bool {
 	components := strings.Split(line, " ")
 
+	policyCharacter := components[1][:1]
 	password := components[2]
+	matches := 0
 
 	numbers := strings.Split(components[0], "-")
-	firstIndex, err := strconv.Atoi(numbers[0])
-	if err != nil {
-		panic(fmt.Sprintf("Couldn't convert: %v", numbers[0]))
+	for _, rawString := range numbers {
+		index, err := strconv.Atoi(rawString)
+		if err != nil {
+			panic(fmt.Sprintf("Couldn't convert: %v", index))
+		}
+		currentCharacter := password[index-1 : index]
+		if currentCharacter == policyCharacter {
+			matches++
+		}
 	}
-	firstIndexCharacter := string(password[firstIndex-1])
-	secondIndex, err := strconv.Atoi(numbers[1])
-	if err != nil {
-		panic(fmt.Sprintf("Couldn't convert: %v", numbers[1]))
-	}
-	secondIndexCharacter := string(password[secondIndex-1])
 
-	character := string(components[1][0])
-
-	return (firstIndexCharacter == character && secondIndexCharacter != character) || (firstIndexCharacter != character && secondIndexCharacter == character)
+	return matches == 1
 }
 
 func main() {

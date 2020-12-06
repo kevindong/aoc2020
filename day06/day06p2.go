@@ -20,7 +20,7 @@ func count(answers string) int {
 
 	set := make(map[string]int)
 	for _, c := range answers {
-		set[string(c)] = set[string(c)] + 1
+		set[string(c)]++
 	}
 	delete(set, "\n")
 

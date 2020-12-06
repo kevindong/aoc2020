@@ -18,11 +18,11 @@ func readGroups(file string) []string {
 func count(answers string) int {
 	numberOfPeople := len(strings.Split(answers, "\n"))
 
-	set := make(map[string]int)
+	set := make(map[rune]int)
 	for _, c := range answers {
-		set[string(c)]++
+		set[c]++
 	}
-	delete(set, "\n")
+	delete(set, '\n')
 
 	counter := 0
 	for _, value := range set {

@@ -44,8 +44,7 @@ func getAnamoly(preamble int, numbers []int) int {
 		window[numbers[i]]++
 	}
 
-	// There was a problem
-	return -1
+	panic("Anamoly number not found")
 }
 
 func findMagicNumber(sum int, numbers []int) int {
@@ -73,7 +72,8 @@ func findMagicNumber(sum int, numbers []int) int {
 			return min + max
 		}
 	}
-	return -1
+
+	panic("Magic number not found")
 }
 
 func isSumPresent(sum int, window map[int]int) bool {

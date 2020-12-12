@@ -44,18 +44,15 @@ func processMovements(movements []string) int {
 				currentY += waypointY
 			}
 		} else if command == 'L' || command == 'R' {
-			mapping := map[string]int{
-				"L90":  3,
-				"L180": 2,
-				"L270": 1,
-				"R90":  1,
-				"R180": 2,
-				"R270": 3,
+			iterations := 0
+			if number%90 != 0 {
+				panic("Rotation number not divisible by 90")
+			} else if command == 'L' {
+				iterations = 4 - (number / 90)
+			} else {
+				iterations = number / 90
 			}
-			iterations, found := mapping[movement]
-			if !found {
-				panic("Unrecognized movement value")
-			}
+
 			for i := 0; i < iterations; i++ {
 				originalX := waypointX
 				originalY := waypointY
